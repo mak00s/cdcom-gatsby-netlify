@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby + Netlify CMS Starter',
+    title: 'コンセプトダイアグラム公式サイト',
     description:
-      'This repo contains an example business website that is built with Gatsby, and Netlify CMS.It follows the JAMstack architecture by using Git as a single source of truth, and Netlify for continuous deployment, and CDN distribution.',
+      '顧客体験（CX）を図解しコミュニケーション戦略を明確にする顧客視点のマーケティング手法',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
