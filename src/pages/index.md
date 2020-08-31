@@ -1,36 +1,20 @@
 ---
 templateKey: index-page
-title: Great coffee with a conscience
+title: コンセプトダイアグラム公式サイト（準備中）
 image: /img/home-jumbotron.jpg
 heading: Great coffee with a conscience
-subheading: Support sustainable farming while enjoying a cup
+subheading: 顧客体験（CX）を図解しコミュニケーション戦略を明確にする顧客視点のマーケティング手法
 mainpitch:
-  title: Why Kaldi
-  description: >
-    Kaldi is the coffee store for everyone who believes that great coffee
-    shouldn't just taste good, it should do good too. We source all of our beans
-    directly from small scale sustainable farmers and make sure part of the
-    profits are reinvested in their communities.
-description: >-
-  Kaldi is the ultimate spot for coffee lovers who want to learn about their
-  java’s origin and support the farmers that grew it. We take coffee production,
-  roasting and brewing seriously and we’re glad to pass that knowledge to
-  anyone.
+  title: コンセプトダイアグラムとは
+  description: |
+    顧客の心理変容と企業の施策を図解し、顧客の理解と施策の評価を行うメソッドです。
+description: 顧客の心理変容と企業の施策を図解し、顧客の理解と施策の評価を行うメソッドです。  UX時代の昨今、どのような状態の訪問者に、どのタイミングで、どのようなコミュニケーションをすることが訪問者にとっても企業にとってもベストなのかを判断し、適切なチャネルで適切な内容のコミュニケーションをしていく必要があります。
 intro:
   blurbs:
     - image: /img/coffee.png
-      text: >
-        We sell green and roasted coffee beans that are sourced directly from
-        independent farmers and farm cooperatives. We’re proud to offer a
-        variety of coffee beans grown with great care for the environment and
-        local communities. Check our post or contact us directly for current
-        availability.
+      text: あくまで企業が望む顧客の変化と、それに対して企業はどうアプローチすべきか、というコミュニケーション戦略マップとして図解して整理することで、起こすべき変化のデータ化や、訪問者の状態の特定、更にはそれらのデータに基づいたコミュニケーション設計や、実行、評価、オートメーションが可能になります。
     - image: /img/coffee-gear.png
-      text: >
-        We offer a small, but carefully curated selection of brewing gear and
-        tools for every taste and experience level. No matter if you roast your
-        own beans or just bought your first french press, you’ll find a gadget
-        to fall in love with in our shop.
+      text: 提唱から早10年。その伝え方も手法自体も進化を続け、いろいろなバージョンが派生したため、最新情報を発信する公式サイトを立ち上げました。定義や描き方に加え、具体例や活用方法、FAQなども掲載していきます。書籍の購入やセミナー参加は必須ではありません。より多くの方に役立つよう願っています。
     - image: /img/tutorials.png
       text: >
         Love a great cup of coffee, but never knew how to make one? Bought a
