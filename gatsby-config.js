@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'コンセプトダイアグラム公式サイト',
+    title: 'コンセプトダイアグラム公式サイトTEST',
     description:
       '顧客体験（CX）を図解しコミュニケーション戦略を明確にする顧客視点のマーケティング手法',
   },
