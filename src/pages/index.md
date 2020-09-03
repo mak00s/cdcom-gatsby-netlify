@@ -1,14 +1,13 @@
 ---
 templateKey: index-page
-title: コンセプトダイアグラム公式サイト（準備中）
+title: Concept-Diagram.com
 image: /img/home-jumbotron.jpg
-heading: Great coffee with a conscience
-subheading: 顧客体験（CX）を図解しコミュニケーション戦略を明確にする顧客視点のマーケティング手法
+heading: CXはもっと具体化を
+subheading: コンセプトダイアグラムの書き方・FAQ・書籍・セミナーのご案内
 mainpitch:
   title: コンセプトダイアグラムとは
-  description: |
-    顧客の心理変容と企業の施策を図解し、顧客の理解と施策の評価を行うメソッドです。
-description: 顧客の心理変容と企業の施策を図解し、顧客の理解と施策の評価を行うメソッドです。  UX時代の昨今、どのような状態の訪問者に、どのタイミングで、どのようなコミュニケーションをすることが訪問者にとっても企業にとってもベストなのかを判断し、適切なチャネルで適切な内容のコミュニケーションをしていく必要があります。
+  description: 顧客の心理変容と企業の施策を関連付け、CXの改善と評価につなげる図解手法です。
+description: 顧客が主役の時代は、どのような状態の顧客をどのような状態へと導くことが、顧客にとっても企業にとっても望ましいのかを定義し、最適な場所とタイミングで適切なメッセージを伝え、接客していく必要があります。
 intro:
   blurbs:
     - image: /img/coffee.png
@@ -36,7 +35,7 @@ intro:
     production, roasting and brewing seriously and we’re glad to pass that
     knowledge to anyone. This is an edit via identity...
 main:
-  heading: Great coffee with no compromises
+  heading: CXはもっと具体化が必要
   description: >
     We hold our coffee to the highest standards from the shrub to the cup.
     That’s why we’re meticulous and transparent about each step of the coffee’s
