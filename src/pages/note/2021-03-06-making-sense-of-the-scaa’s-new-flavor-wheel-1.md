@@ -1,10 +1,10 @@
 ---
 templateKey: blog-post
-title: コンセプトダイアグラムはなぜ軸が２つなのか？
+title: コンセプトダイアグラムの2つの軸について
 date: 2018-10-23T08:39:44.195Z
 description: コンセプトダイアグラムには、なぜ2つの軸をつくることが必須なのか。
 featuredpost: false
-featuredimage: /img/flavor_wheel.jpg
+featuredimage: /img/5d27a414d2450b62121bcec1369a3dc8-1024x576.png
 tags:
   - コンセプトダイアグラム
 ---
