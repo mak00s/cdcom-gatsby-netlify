@@ -6,8 +6,7 @@ description: コンセプトダイアグラムには、なぜ2つの軸をつく
 featuredpost: false
 featuredimage: /img/flavor_wheel.jpg
 tags:
-  - flavor
-  - tasting
+  - コンセプトダイアグラム
 ---
 スタートからゴールに至るまでに**必要な心理的要因を因数分解によって具体化**し、ステップの流れを導き出すためのガイドとするためです。
 
