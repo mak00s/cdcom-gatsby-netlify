@@ -1,36 +1,26 @@
 ---
 templateKey: blog-post
-title: Making sense of the SCAA’s new Flavor Wheel
-date: 2021-03-06T08:39:44.195Z
-description: |-
-  はい、ごめんください。コンセプトダイアグラム・エバンジェリストのコスギです。
-  コンセプトダイアグラムの描き方について、講座でも使っている手順をまとめました。
-  こちらはステップへの落とし込みから始める後編なので、前編を読まれていない方は以下から確認してください。
+title: コンセプトダイアグラムはなぜ軸が２つなのか？
+date: 2018-10-23T08:39:44.195Z
+description: コンセプトダイアグラムには、なぜ2つの軸をつくることが必須なのか。
 featuredpost: false
 featuredimage: /img/flavor_wheel.jpg
 tags:
   - flavor
   - tasting
 ---
-![flavor wheel](/img/flavor_wheel.jpg)
+スタートからゴールに至るまでに**必要な心理的要因を因数分解によって具体化**し、ステップの流れを導き出すためのガイドとするためです。
 
-The SCAA updated the wheel to reflect the finer nuances needed to describe flavors more precisely. The new descriptions are more detailed and hence allow cuppers to distinguish between more flavors.
+軸の性質を大別すると、対象者が「なるほど〜」と知識やノウハウなどが深まっていく受動的な軸と、対象者が「もっともっと！」と欲求が深まっていく能動的な軸があります。知識だけがあっても頭でっかちになりますし、欲求だけがあっても独りよがりになりますよね。
 
-While this is going to be a big change for professional coffee tasters, it means a lot to you as a consumer as well. We’ll explain how the wheel came to be, how pros use it and what the flavors actually mean.
+軸は「深まっていく」ことが大切な要素であり、何よりゴールを説明できるキーワードでもあるので、設定がとても難しいという感想をいただくことが多いですが、この深まりの軸が「ハマる」と、とてもリアルなステップに落とし込めます。
 
-## What the updates mean to you
+ただ、ステップを配置するときに、以下のように斜め一直線に降りてしまうことが時折あるようです。
 
-The Specialty Coffee Association of America (SCAA), founded in 1982, is a non-profit trade organization for the specialty coffee industry. With members located in more than 40 countries, SCAA represents every segment of the specialty coffee industry, including:
+![cd.009](/img/5d27a414d2450b62121bcec1369a3dc8-1024x576.png)
 
-* producers
-* roasters
-* importers/exporters
-* retailers
-* manufacturers
-* baristas
+<br>
 
-For over 30 years, SCAA has been dedicated to creating a vibrant specialty coffee community by recognizing, developing and promoting specialty coffee. SCAA sets and maintains quality standards for the industry, conducts market research, and provides education, training, resources, and business services for its members.
+この場合、ゴールに至るまでの因数分解が足りていません。たとえば、知識軸に見えて本質的には欲求だった場合など、このようなことが起こり得ます。発見や気づきが少ないので、「良い」コンセプトダイアグラムとは言えません。
 
-Coffee cupping, or coffee tasting, is the practice of observing the tastes and aromas of brewed coffee. It is a professional practice but can be done informally by anyone or by professionals known as "Q Graders". A standard coffee cupping procedure involves deeply sniffing the coffee, then loudly slurping the coffee so it spreads to the back of the tongue.
-
-The coffee taster attempts to measure aspects of the coffee's taste, specifically the body (the texture or mouthfeel, such as oiliness), sweetness, acidity (a sharp and tangy feeling, like when biting into an orange), flavour (the characters in the cup), and aftertaste. Since coffee beans embody telltale flavours from the region where they were grown, cuppers may attempt to identify the coffee's origin.
+ステップを考えていくうちに「……待てよ？この軸、何か違うかも？」と思ったら、何度も戻ってブラッシュアップしてください。逆に、軸がなかなか決まらない場合は仮置きして、ステップを考えながら軸を固めていくのでも良いでしょう。
