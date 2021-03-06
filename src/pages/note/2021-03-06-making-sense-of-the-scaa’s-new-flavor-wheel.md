@@ -2,33 +2,57 @@
 templateKey: blog-post
 title: コンセプトダイアグラムとは
 date: 2021-03-06T06:51:37.787Z
-description: |
+description: |+
   こんにちは。清水 誠です。まずは私が提唱する「コンセプトダイアグラム」について説明します。
+  コンセプトダイアグラムとは、顧客の心理変容と企業の施策を図解し、顧客の理解と施策の評価を行うメソッドです。
+
+
 featuredpost: false
 featuredimage: /img/what-is-concept-diagram_xe3ctr.png
 tags:
-  - flavor
-  - tasting
+  - コンセプトダイアグラム
 ---
 ![what-is-concept-diagram_xe3ctr](/img/what-is-concept-diagram_xe3ctr.png "what-is-concept-diagram")
 
-The SCAA updated the wheel to reflect the finer nuances needed to describe flavors more precisely. The new descriptions are more detailed and hence allow cuppers to distinguish between more flavors.
+## **元々はサイト設計の手法だったコンセプトダイアグラム**
 
-While this is going to be a big change for professional coffee tasters, it means a lot to you as a consumer as well. We’ll explain how the wheel came to be, how pros use it and what the flavors actually mean.
+コンセプトダイアグラムはもともと、1990年代後半にUSのWebコンサルティング会社においてインフォメーションアーキテクト（IA）が標準的に活用していた方法論の一つです。コンセプトモデル、エクスペリエンスモデルなどの別称もあります。
 
-## What the updates mean to you
+私がScientやSapient、Razorfishに在籍していたころは他のプロジェクトの成果物をいろいろ見ることができる機会に恵まれました。しかりこれらはビジネスモデルに直結するため、納品物が世の中に出回ることはほとんどありません。そのため体系化が進まず、人やプロジェクトによって描き方が様々なまま、次第に忘れ去られていきました。
 
-The Specialty Coffee Association of America (SCAA), founded in 1982, is a non-profit trade organization for the specialty coffee industry. With members located in more than 40 countries, SCAA represents every segment of the specialty coffee industry, including:
+この手法を見直し、データによるビジネス評価や顧客理解、マーケティングやCRMのオートメーションにつなげやすくするためにアレンジした方法論を「コンセプトダイアグラム」として2008年から提唱しています。
 
-* producers
-* roasters
-* importers/exporters
-* retailers
-* manufacturers
-* baristas
+## 旧来のウェブマーケティングを脱するためには
 
-For over 30 years, SCAA has been dedicated to creating a vibrant specialty coffee community by recognizing, developing and promoting specialty coffee. SCAA sets and maintains quality standards for the industry, conducts market research, and provides education, training, resources, and business services for its members.
+これまでのウェブマーケティングは、企業主体でも通用するところがありました。しかし現在、「売りにくくなっている」と感じることも多いのではないでしょうか。つまり、どのような状態の訪問者に、どのタイミングで、どのようなコミュニケーションをすることが訪問者にとっても企業にとってもベストなのかを判断し、適切なチャネルで適切な内容のコミュニケーションをしていく必要があります。
 
-Coffee cupping, or coffee tasting, is the practice of observing the tastes and aromas of brewed coffee. It is a professional practice but can be done informally by anyone or by professionals known as "Q Graders". A standard coffee cupping procedure involves deeply sniffing the coffee, then loudly slurping the coffee so it spreads to the back of the tongue.
+……このような正論を主張するのは簡単ですし、「そんなことわかっている」「当たり前なので参考にならない」という方も、すでに多いと思います。これらの課題を感じているからこそ、もどかしさを感じている方も少なくないでしょう。
 
-The coffee taster attempts to measure aspects of the coffee's taste, specifically the body (the texture or mouthfeel, such as oiliness), sweetness, acidity (a sharp and tangy feeling, like when biting into an orange), flavour (the characters in the cup), and aftertaste. Since coffee beans embody telltale flavours from the region where they were grown, cuppers may attempt to identify the coffee's origin.
+そこで、現実的で実践しやすいアドバイスとして、コミュニケーションのあり方を図解で整理することをオススメしています。
+
+単に行動の変化を時系列でつなげるのではなく、企業が戦略に基づいてマーケティングによって狙う顧客の心理の変化を明確にしていくのがポイントです。ユーザー視点に立ち過ぎると、企業が伝えるべきメッセージや行うべき施策の洗い出しが難しくなり、その効果をデータで表現・検証することが難しくなってしまいます。
+
+そのため、描く図はユーザーの実情ではありません。あくまで企業が望む顧客の変化と、それに対して企業はどうコミュニケーションすべきか、というコミュニケーションの戦略マップとして図解して整理します。
+
+**図解には以下のようなメリットがあります。**
+
+* 自分の考えを整理できる（実はわかったつもりでわかっていなかったことも自覚できる）
+* 描きながら議論すると脱線しにくく、理解が深まる
+* 他人に見せながら説明しやすい
+* 抽象的なアイデアを後ですぐ思い出せる
+
+このような図解の方法論を「コンセプトダイアグラム」として体系化しています。このコンセプトダイアグラムはUX（ユーザーエクスペリエンス）ではなく、マーケティングの方法論として位置付けられます。
+
+なお、類似手法に2012年頃から普及した「カスタマージャーニーマップ」がありますが、ユーザーとビジネスのバランスを重視し、コミュニケーション施策の洗い出しと位置づけ整理、データ活用につなげることを目的としている点が大きく異なります。
+
+
+
+## 図解後はデータで検証を
+
+コンセプトダイアグラムでは、企業が望む顧客のゴール状態に到達するまでの過程を縦と横の軸を使って表現します。「獲得」「売上」「単価」といった企業視点ではなく、「こだわりの強さ」「危機意識」「自己理解」といった顧客視点の心理的な要因（結果ではない）を設定します。
+
+ゴール到達につながる要因を分解すると、到達までの過程（シナリオ）を二次元で表現できるようになります。下だけに移動することもあれば、右だけに進むこともあります。途中で分岐することもあります。つまり、顧客の心理・態度変容のパターン化が可能になります。
+
+そして、このような軸があるからこそ、起こすべき変化のデータ化や、訪問者の状態の特定、さらには、それらのデータに基づいたコミュニケーション設計や、実行、評価、オートメーションが可能になります。このようなデジタルマーケティングにおけるデータ活用のフレームワーク「カスタマーアナリティクス」も体系化を進めています。
+
+このサイトは「コンセプトダイアグラム」と「カスタマーアナリティクス」の理解と実践を深めていただくために、解析対象として活用していきながら運営しています。各種セミナーに参加された方は実際のデータを見ながら参考にしていただけます。
