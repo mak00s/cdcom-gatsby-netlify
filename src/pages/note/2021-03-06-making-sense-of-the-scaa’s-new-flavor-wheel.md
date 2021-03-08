@@ -8,7 +8,7 @@ description: |+
 
 
 featuredpost: false
-featuredimage: /img/what-is-concept-diagram_xe3ctr.png
+featuredimage: /img/apple-touch-icon.png
 tags:
   - コンセプトダイアグラム
 ---
