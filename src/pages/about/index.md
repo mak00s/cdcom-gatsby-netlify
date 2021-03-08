@@ -1,19 +1,16 @@
 ---
-templateKey: 'about-page'
+templateKey: about-page
 path: /about
-title: About our values
+title: このサイトについて
 ---
-### Shade-grown coffee
-Coffee is a small tree or shrub that grows in the forest understory in its wild form, and traditionally was grown commercially under other trees that provided shade. The forest-like structure of shade coffee farms provides habitat for a great number of migratory and resident species.
+こんにちは。清水 誠です。
 
-### Single origin
-Single-origin coffee is coffee grown within a single known geographic origin. Sometimes, this is a single farm or a specific collection of beans from a single country. The name of the coffee is then usually the place it was grown to whatever degree available.
+UXのメソッドをベースにマーケティング施策やデータ活用へつなげやすい図解手法として「コンセプトダイアグラム」を自分自身で使い始め、「便利だから使ってみて」と職場やセミナー、メディアで紹介するようになって早10年。
 
-### Sustainable farming
-Sustainable agriculture is farming in sustainable ways based on an understanding of ecosystem services, the study of relationships between organisms and their environment. What grows where and how it is grown are a matter of choice and careful consideration for nature and communities.
+わかりやすく伝える方法の模索を続け、2015年に書籍を出版した後も、手法自体がだいぶ進化しました。時期によってバージョンが異なるので、「調べて実践してみよう」と思っても古い記事で混乱したり、うまく活用できず諦める、ということも増えてきました。
 
-### Direct sourcing
-Direct trade is a form of sourcing practiced by some coffee roasters. Advocates of direct trade practices promote direct communication and price negotiation between buyer and farmer, along with systems that encourage and incentivize quality.
+このままみなさんにご迷惑をお掛けし続けるのは申し訳ないので、提唱者として最新の「正」の情報を発信するサイトを立ち上げることにしました。
 
-### Reinvest profits
-We want to truly empower the communities that bring amazing coffee to you. That’s why we reinvest 20% of our profits into farms, local businesses and schools everywhere our coffee is grown. You can see the communities grow and learn more about coffee farming on our blog.
+定義や描き方の最新情報を集約してタイムリーにお伝えするだけでなく、描き方のコツや具体例、事例、活用方法、FAQなども掲載していきます。書籍を購入された方や、過去に有料無料問わずセミナーに参加された方のフォローアップコンテンツやメール配信サービスも予定しています。有料セミナーのご案内も含まれますが、ノウハウを出し惜しみするマネタイズやリスト獲得が主目的ではなく、より多くの方々にとって考え方や方法論が役立つことを願っての活動です。
+
+ご要望、ご質問、わかりにくい点のご指摘など、どうぞ遠慮なく教えてください。
