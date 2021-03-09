@@ -7,6 +7,7 @@ featuredpost: false
 featuredimage: /img/apple-touch-icon.png
 tags:
   - コンセプトダイアグラム
+  - 描き方
 ---
 スタートからゴールに至るまでに**必要な心理的要因を因数分解によって具体化**し、ステップの流れを導き出すためのガイドとするためです。
 
