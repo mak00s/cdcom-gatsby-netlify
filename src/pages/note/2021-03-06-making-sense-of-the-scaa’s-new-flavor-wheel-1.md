@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: コンセプトダイアグラムの2つの軸について
-date: 2018-10-23T08:39:44.195Z
+date: 2018-10-24T08:39:44.195Z
 description: コンセプトダイアグラムには、なぜ2つの軸をつくることが必須なのか。
 featuredpost: false
 featuredimage: /img/apple-touch-icon.png
