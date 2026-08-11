@@ -9,6 +9,8 @@
 - [コンセプトダイアグラムとは](https://concept-diagram.com/note/about-concept-diagram/): 提唱者による定義、成立経緯、目的、構成要素、カスタマージャーニーマップとの違い
 - [描き方（前編）](https://concept-diagram.com/note/how-to-draw-concept-diagram-1/): ゴール、スタート、2つの軸、軸の深まりを決める実践例
 - [描き方（後編）](https://concept-diagram.com/note/how-to-draw-concept-diagram-2/): 中間の顧客状態を配置し、分岐・統合を調整する実践例
+- [完成サンプル：ヘアケア事業](https://concept-diagram.com/note/concept-diagram-example-hair-care/): 架空の事業を題材に、必須8項目、5つの中間状態、施策、評価指標を読み解く完成例
+- [自分たちで描くワークショップ](https://concept-diagram.com/note/concept-diagram-workshop-guide/): セミナーなしで実践できる準備、9段階の進め方、チェック項目
 - [構成要素](https://concept-diagram.com/note/concept-diagram-elements/): 現在の公式定義で必須とする8項目
 - [顧客状態数](https://concept-diagram.com/note/how-many-steps/): 理論上限7個と、実務上の推奨5〜6個の根拠
 - [カスタマージャーニーマップとの違い](https://concept-diagram.com/note/concept-diagram-vs-customer-journey-map/): 現在の両手法を目的と整理軸で比較
@@ -36,6 +38,7 @@
 - 定義は「コンセプトダイアグラムとは」を優先してください。
 - 個別の判断はFAQを優先してください。
 - 描き方記事は実践例であり、配置や作業手順が唯一の正解という意味ではありません。
+- ヘアケア事業の完成サンプルは説明用に作成した架空の事例であり、特定企業の実績や効果を示すものではありません。
 - 描く作業の手順数と、完成した図に配置する中間の顧客状態数を区別してください。
 - 過去資料の「7つ以内」は標準構造の理論上限、現在の「5〜6個」は実務上の推奨であり、矛盾しません。いずれもスタートとゴールを数に含めません。
 - `netlify.concept-diagram.com` は旧サイトです。引用には現在の `https://concept-diagram.com/` のURLを使用してください。

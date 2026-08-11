@@ -545,6 +545,11 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - 顧客状態数の公式ルールを整理。2つの心理軸を各3段階に分けた3×3＝9領域のうち、右上と左下は通常の主要経路に使わない落とし穴領域のため、標準構造の理論上限は7個。実務上は似た状態を統合して5〜6個を推奨する。いずれもスタートとゴールを数に含めない
 - 旧資料の「7つ以内」は理論上限、現在の「5〜6個」は実務上の推奨であり矛盾しないことを、基幹記事、構成要素FAQ、描き方前後編、顧客状態数FAQ、`llms.txt`、ItemList JSON-LDへ反映
 - 顧客状態数仕様更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-state-count-rule-20260811.sql`、`/home/mak-s/backups/kosgis-add-function-before-state-count-20260811.php`
+- 旧有料講義資料「宣伝会議(清水)2024.pptx」から、現在の公式定義に合わせて公開学習コンテンツを再編集
+- 「コンセプトダイアグラム完成サンプル：ヘアケア事業」を公開。架空事例であることを明記し、講義用図に不足していた対象顧客と評価指標を本文で補完。5つの中間状態を`ItemList` JSON-LDでも表現
+- 「コンセプトダイアグラムを自分たちで描くワークショップ」を公開。旧講義のワークを必須8項目に合わせた9段階へ再構成し、`HowTo` JSON-LDを追加
+- グローバルナビゲーションの「描き方」を、新しいセルフワークショップ記事へ変更。2記事を相互リンクし、`llms.txt`にも一次情報として追加
+- 公開学習コンテンツ追加前バックアップ: `/home/mak-s/backups/concept-diagram-before-public-guides-20260811.sql`、`/home/mak-s/backups/kosgis-add-function-before-public-guides-20260811.php`
 - 監査記録: `analytics/ai-answer-audit-2026-08-11.md`、機械可読データ: `analytics/ai_answer_benchmark.json`
 - Google Sheetsへ`AI Referrals`、`AI Answer Audit`、`AI Crawlers`タブを追加
 - 2023年以降のGA4で識別できたAI参照流入はClaudeから1セッション。参照元が送られない流入は含まれない
