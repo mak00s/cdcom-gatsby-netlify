@@ -9,6 +9,7 @@ import os
 import sys
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urlparse
 
@@ -33,6 +34,14 @@ SCOPES = (
 )
 REPORT_TZ = timezone(timedelta(hours=9))
 DEFAULT_BACKFILL_WEEKS = 52
+AI_SOURCE_PATTERNS = {
+    "ChatGPT": ("chatgpt.com", "chat.openai.com"),
+    "Claude": ("claude.ai",),
+    "Gemini": ("gemini.google.com", "bard.google.com"),
+    "Perplexity": ("perplexity.ai",),
+    "Microsoft Copilot": ("copilot.microsoft.com", "bing.com/chat"),
+}
+AUDIT_DATA_PATH = Path(__file__).with_name("ai_answer_benchmark.json")
 
 
 @dataclass(frozen=True)
@@ -170,6 +179,21 @@ def is_external_referrer(referrer: str, site_host: str) -> bool:
     return bool(host and host != site_host and not host.endswith(f".{site_host}"))
 
 
+def ai_service(source: str) -> str | None:
+    value = source.lower().strip()
+    for service, patterns in AI_SOURCE_PATTERNS.items():
+        if any(pattern in value for pattern in patterns):
+            return service
+    return None
+
+
+def load_json_rows(path: Path, columns: list[str]) -> list[list[Any]]:
+    if not path.exists():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return [[item.get(column, "") for column in columns] for item in data]
+
+
 def collect_report(config: Config) -> dict[str, list[list[Any]]]:
     ga = BetaAnalyticsDataClient(credentials=config.credentials)
     gsc = build("searchconsole", "v1", credentials=config.credentials, cache_discovery=False)
@@ -199,6 +223,15 @@ def collect_report(config: Config) -> dict[str, list[list[Any]]]:
                 string_filter=Filter.StringFilter(value="Organic Search"),
             )
         ),
+    )
+    ai_sources = ga_report(
+        ga,
+        config.ga4_property_id,
+        first_week_start,
+        last_week_end,
+        ["isoYearIsoWeek", "sessionSource", "sessionMedium"],
+        ["sessions", "totalUsers", "engagedSessions"],
+        limit=10000,
     )
     gsc_daily = gsc_query(
         gsc,
@@ -297,6 +330,23 @@ def collect_report(config: Config) -> dict[str, list[list[Any]]]:
         ["query", "page"],
         row_limit=25000,
     )
+    ai_referral_rows = sorted(
+        [
+            [
+                datetime.strptime(row["isoYearIsoWeek"] + "-1", "%G%V-%u").date().isoformat(),
+                (datetime.strptime(row["isoYearIsoWeek"] + "-1", "%G%V-%u").date() + timedelta(days=6)).isoformat(),
+                ai_service(row.get("sessionSource", "")),
+                row.get("sessionSource", ""),
+                row.get("sessionMedium", ""),
+                n(row.get("sessions", 0)),
+                n(row.get("totalUsers", 0)),
+                n(row.get("engagedSessions", 0)),
+            ]
+            for row in ai_sources
+            if ai_service(row.get("sessionSource", ""))
+        ],
+        key=lambda row: (row[0], row[2], row[3]),
+    )
 
     return {
         "Weekly": weekly,
@@ -350,6 +400,15 @@ def collect_report(config: Config) -> dict[str, list[list[Any]]]:
             for row in referrers
             if is_external_referrer(row.get("pageReferrer", ""), config.site_host)
         ],
+        "AI Referrals": ai_referral_rows,
+        "AI Answer Audit": load_json_rows(
+            AUDIT_DATA_PATH,
+            ["date", "phase", "service", "mode", "proposer", "definition", "official_url", "official_primary", "step_count", "old_url_avoided", "current_scope", "score", "notes"],
+        ),
+        "AI Crawlers": load_json_rows(
+            Path(os.environ.get("AI_CRAWLER_JSON", "analytics/ai_crawler_snapshot.json")),
+            ["week_start", "week_end", "crawler", "candidate_requests", "verified_requests", "content_requests", "robots_requests", "http_2xx", "http_4xx", "http_5xx", "last_seen", "notes"],
+        ),
     }
 
 
@@ -361,7 +420,30 @@ HEADERS: dict[str, list[str]] = {
     "Query × LP": ["期間開始", "期間終了", "検索クエリ", "ランディングページ", "クリック", "表示回数", "CTR", "平均掲載順位"],
     "Traffic Sources": ["期間開始", "期間終了", "参照元", "メディア", "チャネル", "セッション", "ユーザー", "エンゲージドセッション"],
     "Observed Backlinks": ["期間開始", "期間終了", "参照元URL", "到達LP", "セッション", "ユーザー"],
+    "AI Referrals": ["週開始", "週終了", "AIサービス", "参照元", "メディア", "セッション", "ユーザー", "エンゲージドセッション"],
+    "AI Answer Audit": ["監査日", "段階", "AIサービス", "モード", "提唱者", "定義", "公式URL引用", "公式優先", "ステップ数", "旧URL回避", "現サービス", "合計", "所見"],
+    "AI Crawlers": ["週開始", "週終了", "クローラー", "UA候補", "検証済みリクエスト", "コンテンツ取得", "robots.txt", "2xx", "4xx", "5xx", "最終確認", "所見"],
 }
+
+
+def ensure_report_tabs(sheets: Any, spreadsheet_id: str) -> None:
+    spreadsheet = sheets.spreadsheets().get(
+        spreadsheetId=spreadsheet_id, fields="sheets.properties"
+    ).execute()
+    existing = {sheet["properties"]["title"] for sheet in spreadsheet.get("sheets", [])}
+    missing = [tab for tab in HEADERS if tab not in existing]
+    if missing:
+        sheets.spreadsheets().batchUpdate(
+            spreadsheetId=spreadsheet_id,
+            body={"requests": [{"addSheet": {"properties": {"title": tab}}} for tab in missing]},
+        ).execute()
+    for tab, headers in HEADERS.items():
+        sheets.spreadsheets().values().update(
+            spreadsheetId=spreadsheet_id,
+            range=f"'{tab}'!A1",
+            valueInputOption="RAW",
+            body={"values": [headers]},
+        ).execute()
 
 
 def replace_tab_values(sheets: Any, spreadsheet_id: str, tab: str, rows: list[list[Any]]) -> None:
@@ -387,6 +469,25 @@ def update_dashboard(sheets: Any, spreadsheet_id: str, report: dict[str, list[li
     primary = [[latest[2], delta(2), latest[3], delta(3), latest[5], delta(5)]]
     search = [[latest[7], delta(7), latest[8], delta(8), latest[10], ""]]
     period = [["対象週", latest[0], latest[1], f"更新: {datetime.now(REPORT_TZ).isoformat(timespec='seconds')}"]]
+    ai_rows = report.get("AI Referrals", [])
+    latest_report_week = date.fromisoformat(latest[0]) if latest[0] else None
+    ai_cutoff = latest_report_week - timedelta(weeks=3) if latest_report_week else None
+    ai_last_four_weeks = sum(
+        float(row[5] or 0)
+        for row in ai_rows
+        if ai_cutoff and ai_cutoff <= date.fromisoformat(row[0]) <= latest_report_week
+    )
+    crawler_requests = sum(float(row[4] or 0) for row in report.get("AI Crawlers", []))
+    completed_audits = [row for row in report.get("AI Answer Audit", []) if row[1] == "after" and isinstance(row[11], (int, float))]
+    audit_average = sum(float(row[11]) for row in completed_audits) / len(completed_audits) if completed_audits else "未測定"
+    audit_label = f"{audit_average:.1f}/7" if isinstance(audit_average, float) else audit_average
+    ai_summary = (
+        "復旧後はセッション・自然検索・GSCクリック／表示・平均順位を週次比較します。\n"
+        f"AI可視性: 直近4週AI流入 {n(ai_last_four_weeks)}件 / "
+        f"保存ログ内の公式IP検証済みAI・検索クロール {n(crawler_requests)}件 / "
+        f"回答監査平均 {audit_label}\n"
+        "AI流入は参照元、クロールは公式IP範囲照合、回答監査は同一プロンプトで測定。"
+    )
     sheets.spreadsheets().values().update(
         spreadsheetId=spreadsheet_id,
         range="'Dashboard'!B4:G4",
@@ -405,10 +506,17 @@ def update_dashboard(sheets: Any, spreadsheet_id: str, report: dict[str, list[li
         valueInputOption="RAW",
         body={"values": period},
     ).execute()
+    sheets.spreadsheets().values().update(
+        spreadsheetId=spreadsheet_id,
+        range="'Dashboard'!A9",
+        valueInputOption="RAW",
+        body={"values": [[ai_summary]]},
+    ).execute()
 
 
 def write_report(config: Config, report: dict[str, list[list[Any]]]) -> None:
     sheets = build("sheets", "v4", credentials=config.credentials, cache_discovery=False)
+    ensure_report_tabs(sheets, config.spreadsheet_id)
     for tab, rows in report.items():
         replace_tab_values(sheets, config.spreadsheet_id, tab, rows)
     update_dashboard(sheets, config.spreadsheet_id, report)

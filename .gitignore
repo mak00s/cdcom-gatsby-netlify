@@ -7,3 +7,15 @@ public/
 static/admin/*.bundle.*
 .DS_Store
 yarn-error.log
+
+# Local credentials
+.env
+.env.local
+.env.*.local
+
+# Local Netlify folder
+.netlify
+
+# Generated Python files
+__pycache__/
+*.pyc

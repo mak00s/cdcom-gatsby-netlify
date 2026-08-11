@@ -26,6 +26,18 @@ jobs:
           cache-dependency-path: analytics/requirements.txt
       - name: Install dependencies
         run: pip install -r analytics/requirements.txt
+      - name: Collect and validate AI crawler requests
+        env:
+          SAKURA_CRAWLER_SSH_PRIVATE_KEY: ${{ secrets.SAKURA_CRAWLER_SSH_PRIVATE_KEY }}
+          SAKURA_CRAWLER_SSH_KNOWN_HOSTS: ${{ secrets.SAKURA_CRAWLER_SSH_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SAKURA_CRAWLER_SSH_PRIVATE_KEY" > ~/.ssh/concept_crawler
+          chmod 600 ~/.ssh/concept_crawler
+          printf '%s\n' "$SAKURA_CRAWLER_SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          ssh -T -i ~/.ssh/concept_crawler -o IdentitiesOnly=yes \
+            mak-s@www3780.sakura.ne.jp \
+            | python analytics/ai_crawler_report.py --output analytics/ai_crawler_snapshot.json
       - name: Refresh Google Sheets report
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
@@ -34,4 +46,5 @@ jobs:
           GSC_SITE_URL: "sc-domain:concept-diagram.com"
           SITE_HOST: "concept-diagram.com"
           BACKFILL_WEEKS: "52"
+          AI_CRAWLER_JSON: "analytics/ai_crawler_snapshot.json"
         run: python analytics/weekly_report.py
