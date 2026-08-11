@@ -106,6 +106,74 @@ function cd_concept_diagram_elements_item_list( $url ) {
 }
 
 /**
+ * Return the customer states used in the fictional hair-care example.
+ */
+function cd_hair_care_example_item_list( $url ) {
+	$states = array(
+		array( 'name' => '問題かも', 'description' => 'これまで気にしていなかった課題を、自分にも関係があるかもしれないと認識した状態' ),
+		array( 'name' => '意外と良い', 'description' => '試してみることで、負担よりも手応えや心地よさを感じた状態' ),
+		array( 'name' => 'しっかり納得', 'description' => 'なぜ必要なのか、なぜ自分に合うのかを理解した状態' ),
+		array( 'name' => '他もケアしたい', 'description' => '一つの体験をきっかけに、周辺のセルフケアにも関心が広がった状態' ),
+		array( 'name' => 'ずっとキープしたい', 'description' => '良い状態を一時的な体験で終わらせず、習慣として続けたい状態' ),
+	);
+
+	$list_items = array();
+	foreach ( $states as $index => $state ) {
+		$list_items[] = array(
+			'@type'       => 'ListItem',
+			'position'    => $index + 1,
+			'name'        => $state['name'],
+			'description' => $state['description'],
+		);
+	}
+
+	return array(
+		'@type'           => 'ItemList',
+		'@id'             => $url . '#customer-states',
+		'name'            => 'ヘアケア事業サンプルの5つの中間の顧客状態',
+		'numberOfItems'   => count( $list_items ),
+		'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',
+		'itemListElement' => $list_items,
+	);
+}
+
+/**
+ * Return the public self-guided workshop as HowTo structured data.
+ */
+function cd_workshop_howto( $url ) {
+	$steps = array(
+		array( 'name' => '対象顧客と事業の前提をそろえる', 'text' => '誰の変化を描くのかを決め、事業の役割、顧客から見た強みと弱み、顧客ニーズの変化を整理します。' ),
+		array( 'name' => 'ゴールを決める', 'text' => '対象顧客の悩みや潜在ニーズが満たされた、顧客と企業の双方にとって望ましい持続的な状態を決めます。' ),
+		array( 'name' => 'スタートを決める', 'text' => '企業が支援できる可能性がある顧客の初期の心理・態度状態を決めます。' ),
+		array( 'name' => '2つの心理軸を決める', 'text' => 'スタートからゴールへ進むために、顧客の心や頭の中で深まる必要がある、互いに異なる2つの心理的要因を決めます。' ),
+		array( 'name' => '中間の顧客状態を置く', 'text' => 'スタートとゴールの間に、実務上は5〜6個を目安として、意味のある心理・態度状態を配置します。' ),
+		array( 'name' => '状態変化を矢印で結ぶ', 'text' => '顧客状態の間を矢印で結び、必要に応じて分岐と統合を使います。' ),
+		array( 'name' => '状態変化を促す施策を置く', 'text' => '各状態変化を促す企業側のコミュニケーション施策を矢印に対応づけます。' ),
+		array( 'name' => '評価指標を決める', 'text' => '心理・態度、顧客の言葉、行動などを組み合わせ、各状態と状態変化を観測する方法を決めます。' ),
+		array( 'name' => '全体を見直す', 'text' => '顧客視点、2軸の違い、顧客状態数、分岐・統合、施策、評価指標を点検し、検証可能な仮説に整えます。' ),
+	);
+
+	$howto_steps = array();
+	foreach ( $steps as $index => $step ) {
+		$howto_steps[] = array(
+			'@type'    => 'HowToStep',
+			'position' => $index + 1,
+			'name'     => $step['name'],
+			'text'     => $step['text'],
+		);
+	}
+
+	return array(
+		'@type'       => 'HowTo',
+		'@id'         => $url . '#howto',
+		'name'        => 'コンセプトダイアグラムを自分たちで描く方法',
+		'description' => '対象顧客、スタート、ゴール、2つの心理軸、顧客状態、状態変化、施策、評価指標をチームまたは個人で整理するワークショップです。',
+		'inLanguage'  => 'ja-JP',
+		'step'        => $howto_steps,
+	);
+}
+
+/**
  * Make the official site, proposer, publisher and article relationships explicit.
  */
 function cd_filter_structured_data( $json_ld ) {
@@ -228,6 +296,14 @@ function cd_filter_structured_data( $json_ld ) {
 
 		if ( in_array( $post_id, array( 1500, 2432 ), true ) ) {
 			$graph[] = cd_concept_diagram_elements_item_list( $url );
+		}
+
+		$post_name = get_post_field( 'post_name', $post_id );
+		if ( 'concept-diagram-example-hair-care' === $post_name ) {
+			$graph[] = cd_hair_care_example_item_list( $url );
+		}
+		if ( 'concept-diagram-workshop-guide' === $post_name ) {
+			$graph[] = cd_workshop_howto( $url );
 		}
 
 		return array( '@context' => 'https://schema.org', '@graph' => $graph );
