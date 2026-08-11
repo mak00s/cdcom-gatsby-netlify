@@ -108,15 +108,15 @@
     "date": "2026-08-11",
     "phase": "after",
     "service": "Claude",
-    "mode": "未ログイン",
-    "proposer": "",
-    "definition": "",
-    "official_url": "",
-    "official_primary": "",
-    "step_count": "",
-    "old_url_avoided": "",
-    "current_scope": "",
-    "score": "",
-    "notes": "個人アカウントのログイン状態がなく、即時再測定できず。"
+    "mode": "ログイン・Opus 5（高）・Web検索",
+    "proposer": 1,
+    "definition": 1,
+    "official_url": 1,
+    "official_primary": 1,
+    "step_count": 1,
+    "old_url_avoided": 1,
+    "current_scope": 1,
+    "score": 7,
+    "notes": "現行公式サイトを一次情報として優先。清水誠、基本5〜6状態、CJMとの差、現在は公開情報と問い合わせのみを正しく説明。旧個人ブログや過去サービスは区別。改修前は未測定。"
   }
 ]
