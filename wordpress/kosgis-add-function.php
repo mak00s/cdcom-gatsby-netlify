@@ -71,6 +71,41 @@ function cd_structured_data_logo_url() {
 }
 
 /**
+ * Return the eight required Concept Diagram design items as an ItemList.
+ */
+function cd_concept_diagram_elements_item_list( $url ) {
+	$elements = array(
+		array( 'name' => '対象顧客', 'description' => 'この図で心理・態度変容を考える顧客の範囲' ),
+		array( 'name' => 'スタート', 'description' => '対象顧客の初期の心理・態度状態' ),
+		array( 'name' => 'ゴール', 'description' => '企業と顧客の双方にとって望ましい、持続的な到達状態' ),
+		array( 'name' => '2つの心理軸', 'description' => 'ゴール到達につながる、顧客視点の異なる心理的要因' ),
+		array( 'name' => '顧客状態', 'description' => '軸の深まりに応じた中間の心理・態度状態。スタートとゴールを除き、実務上は5〜6個を推奨。標準構造の理論上限は7個' ),
+		array( 'name' => '状態変化', 'description' => '顧客状態間の変化、分岐、統合を示す矢印' ),
+		array( 'name' => '施策', 'description' => '状態変化を促す企業側のコミュニケーション' ),
+		array( 'name' => '評価指標', 'description' => '顧客状態や状態変化を観測し、施策を評価・改善するための指標' ),
+	);
+
+	$list_items = array();
+	foreach ( $elements as $index => $element ) {
+		$list_items[] = array(
+			'@type'       => 'ListItem',
+			'position'    => $index + 1,
+			'name'        => $element['name'],
+			'description' => $element['description'],
+		);
+	}
+
+	return array(
+		'@type'           => 'ItemList',
+		'@id'             => $url . '#concept-diagram-elements',
+		'name'            => 'コンセプトダイアグラムの必須8項目',
+		'numberOfItems'   => count( $list_items ),
+		'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',
+		'itemListElement' => $list_items,
+	);
+}
+
+/**
  * Make the official site, proposer, publisher and article relationships explicit.
  */
 function cd_filter_structured_data( $json_ld ) {
@@ -189,6 +224,10 @@ function cd_filter_structured_data( $json_ld ) {
 					),
 				),
 			);
+		}
+
+		if ( in_array( $post_id, array( 1500, 2432 ), true ) ) {
+			$graph[] = cd_concept_diagram_elements_item_list( $url );
 		}
 
 		return array( '@context' => 'https://schema.org', '@graph' => $graph );

@@ -542,6 +542,9 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - FAQ「コンセプトダイアグラムの構成要素は何ですか？」を追加し、必須／補助の区別、評価指標を追加する時点、8項目の簡略例を掲載。基幹記事、描き方前後編、ステップ数FAQから相互リンク
 - 基幹記事と構成要素FAQへ、8項目を順序付きで表す`ItemList` JSON-LDを追加。両ページで8件の`ListItem`を検証済み
 - 構成要素仕様更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-elements-spec-20260811.sql`、`/home/mak-s/backups/kosgis-add-function-before-elements-20260811.php`
+- 顧客状態数の公式ルールを整理。2つの心理軸を各3段階に分けた3×3＝9領域のうち、右上と左下は通常の主要経路に使わない落とし穴領域のため、標準構造の理論上限は7個。実務上は似た状態を統合して5〜6個を推奨する。いずれもスタートとゴールを数に含めない
+- 旧資料の「7つ以内」は理論上限、現在の「5〜6個」は実務上の推奨であり矛盾しないことを、基幹記事、構成要素FAQ、描き方前後編、顧客状態数FAQ、`llms.txt`、ItemList JSON-LDへ反映
+- 顧客状態数仕様更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-state-count-rule-20260811.sql`、`/home/mak-s/backups/kosgis-add-function-before-state-count-20260811.php`
 - 監査記録: `analytics/ai-answer-audit-2026-08-11.md`、機械可読データ: `analytics/ai_answer_benchmark.json`
 - Google Sheetsへ`AI Referrals`、`AI Answer Audit`、`AI Crawlers`タブを追加
 - 2023年以降のGA4で識別できたAI参照流入はClaudeから1セッション。参照元が送られない流入は含まれない
