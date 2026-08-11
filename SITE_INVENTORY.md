@@ -537,6 +537,11 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - CJM比較更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-cjm-rewrite-20260811.sql`
 - FAQ「コンセプトダイアグラムとカスタマージャーニーマップの違いは？」を追加。旧セミナー資料の整理、CJM実務の広がり、現在の公式比較、過去資料を引用する際の注意を説明し、基幹記事から相互リンク。GOV.UKの取得可能な資料でCurrent／To-Beの説明を補強
 - CJM FAQ追加前バックアップ: `/home/mak-s/backups/concept-diagram-before-cjm-faq-20260811.sql`
+- 構成要素を公式の必須8項目（対象顧客、スタート、ゴール、2つの心理軸、顧客状態、状態変化、施策、評価指標）として固定。従来の5分類は複数要素をまとめた分類だったことを明記
+- 「ステップ」は作業手順と紛らわしいため、図中の中間状態を現在の公式用語では「顧客状態」と表記。基本5〜6個はスタートとゴールを除く中間の顧客状態数と明記
+- FAQ「コンセプトダイアグラムの構成要素は何ですか？」を追加し、必須／補助の区別、評価指標を追加する時点、8項目の簡略例を掲載。基幹記事、描き方前後編、ステップ数FAQから相互リンク
+- 基幹記事と構成要素FAQへ、8項目を順序付きで表す`ItemList` JSON-LDを追加。両ページで8件の`ListItem`を検証済み
+- 構成要素仕様更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-elements-spec-20260811.sql`、`/home/mak-s/backups/kosgis-add-function-before-elements-20260811.php`
 - 監査記録: `analytics/ai-answer-audit-2026-08-11.md`、機械可読データ: `analytics/ai_answer_benchmark.json`
 - Google Sheetsへ`AI Referrals`、`AI Answer Audit`、`AI Crawlers`タブを追加
 - 2023年以降のGA4で識別できたAI参照流入はClaudeから1セッション。参照元が送られない流入は含まれない
