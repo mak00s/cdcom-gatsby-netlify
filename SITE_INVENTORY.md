@@ -532,6 +532,9 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - 公開サイト20 URLをクロールし、すべてHTTP 200、実リンク・実画像の内部リンク切れなしを確認。主要画像の代替テキストを補完
 - 本番変更前バックアップ: `/home/mak-s/backups/ai-readiness-20260811/database.sql.gz`、`wp-content.tar.gz`（権限600）
 - 改修前の同一プロンプト監査では、ChatGPT 5/7、Gemini 5/7、Perplexity 3/7。Claudeは個人アカウント未ログインのため未測定
+- 改修直後の監査はChatGPT 5/7、Gemini 5/7、Perplexity 5/7、Claude 7/7。Perplexityは公式サイトの採用が改善した一方、旧個人ブログの「7つ以内」を現行情報と誤認
+- AI回答の指摘を受け、基幹記事のCJM比較を2026-08-11に更新。「CJMは現状把握だけ」という二分を廃止し、現代のCJMが将来像、施策、KPI、組織・業務も扱うこと、両手法の差は主な整理軸にあること、併用できることを比較表で明記
+- CJM比較更新前バックアップ: `/home/mak-s/backups/concept-diagram-before-cjm-rewrite-20260811.sql`
 - 監査記録: `analytics/ai-answer-audit-2026-08-11.md`、機械可読データ: `analytics/ai_answer_benchmark.json`
 - Google Sheetsへ`AI Referrals`、`AI Answer Audit`、`AI Crawlers`タブを追加
 - 2023年以降のGA4で識別できたAI参照流入はClaudeから1セッション。参照元が送られない流入は含まれない
