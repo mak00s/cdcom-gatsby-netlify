@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: kosgis add function
- * Version: 1.1
+ * Version: 1.2
 */
 function prnt($arg) {
 	if(!is_user_logged_in()) return;
@@ -55,6 +55,83 @@ function trans_custom_gettext() {
 add_filter( 'gettext_with_context', 'trans_custom_gettext', 10, 4 );
 add_filter( 'ngettext', 'trans_custom_gettext', 10, 5 );
 add_filter( 'ngettext_with_context', 'trans_custom_gettext', 10, 6 );
+
+/**
+ * Keep the homepage and the official overview focused on distinct search intents.
+ */
+function cd_document_title( $title ) {
+	if ( is_front_page() ) {
+		return 'コンセプトダイアグラム公式サイト｜顧客の変化を描き、施策と指標をつなぐ';
+	}
+
+	if ( is_singular() && 1500 === get_queried_object_id() ) {
+		return 'コンセプトダイアグラムとは｜目的・8つの構成要素・CJMとの違い';
+	}
+
+	return $title;
+}
+add_filter( 'pre_get_document_title', 'cd_document_title', 20 );
+
+/**
+ * Do not ask search engines to index thin archive pages that compete with the
+ * official overview. FAQ and case category hubs remain indexable.
+ */
+function cd_archive_robots( $robots ) {
+	if ( is_home() || is_author() || is_tag() || is_category( 'about-cd' ) ) {
+		unset( $robots['index'] );
+		$robots['noindex'] = true;
+		$robots['follow']  = true;
+	}
+
+	return $robots;
+}
+add_filter( 'wp_robots', 'cd_archive_robots', PHP_INT_MAX );
+
+/**
+ * On the homepage, use the learning proposition as the document heading and
+ * keep the site name as branding. Snow Monkey otherwise renders the branding
+ * as the only h1 and the showcase title as h2.
+ */
+function cd_home_branding_heading( $html ) {
+	if ( ! is_front_page() ) {
+		return $html;
+	}
+
+	return preg_replace(
+		'/<h1(\s+class="c-site-branding__title")>(.*?)<\/h1>/s',
+		'<div$1>$2</div>',
+		$html,
+		1
+	);
+}
+add_filter(
+	'snow_monkey_template_part_render_template-parts/header/site-branding',
+	'cd_home_branding_heading',
+	20
+);
+
+function cd_home_sidebar_buffer_start( $index ) {
+	if ( is_front_page() && 'front-page-top-widget-area' === $index ) {
+		ob_start();
+	}
+}
+add_action( 'dynamic_sidebar_before', 'cd_home_sidebar_buffer_start', 1 );
+
+function cd_home_sidebar_buffer_end( $index ) {
+	if ( ! is_front_page() || 'front-page-top-widget-area' !== $index ) {
+		return;
+	}
+
+	$html = ob_get_clean();
+	$html = preg_replace(
+		'/<h2 class="wpaw-showcase__title">(.*?)<\/h2>/s',
+		'<h1 class="wpaw-showcase__title">$1</h1>',
+		$html,
+		1
+	);
+	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+add_action( 'dynamic_sidebar_after', 'cd_home_sidebar_buffer_end', PHP_INT_MAX );
 
 /**
  * Return the best available site logo for structured data.
@@ -174,6 +251,41 @@ function cd_workshop_howto( $url ) {
 }
 
 /**
+ * Return the concise drawing overview as HowTo structured data.
+ */
+function cd_drawing_hub_howto( $url ) {
+	$steps = array(
+		array( 'name' => 'ゴールとスタートを決める', 'text' => '対象顧客を定め、顧客と企業の双方にとって望ましい持続的なゴールと、企業が支援できる初期状態を決めます。' ),
+		array( 'name' => '2つの心理軸を決める', 'text' => 'ゴールへ近づくために顧客の心や頭の中で深まる、互いに異なる2つの心理的要因を決めます。' ),
+		array( 'name' => '軸の深まりを言葉にする', 'text' => 'それぞれの軸が浅い状態から深い状態へどう変わるかを、顧客の言葉で書き出します。' ),
+		array( 'name' => '中間の顧客状態を置く', 'text' => 'スタートとゴールの間に、意味のある心理・態度の変化を5〜6個を目安に配置します。' ),
+		array( 'name' => '分岐と統合を整える', 'text' => 'すべての顧客が同じ順序で進むと決めつけず、必要な分岐と統合を矢印で表します。' ),
+		array( 'name' => '体験と施策を結びつける', 'text' => '各状態変化を支える体験やコミュニケーション施策を、顧客状態ではなく矢印へ対応づけます。' ),
+		array( 'name' => '評価指標を決める', 'text' => '本人の声、心理・態度、行動などを組み合わせ、状態と状態変化を観測する方法を決めます。' ),
+		array( 'name' => 'サンプルと照らして検証する', 'text' => '完成サンプルと公式FAQを参照し、図を正解ではなく検証可能な仮説として見直します。' ),
+	);
+
+	$howto_steps = array();
+	foreach ( $steps as $index => $step ) {
+		$howto_steps[] = array(
+			'@type'    => 'HowToStep',
+			'position' => $index + 1,
+			'name'     => $step['name'],
+			'text'     => $step['text'],
+		);
+	}
+
+	return array(
+		'@type'       => 'HowTo',
+		'@id'         => $url . '#howto',
+		'name'        => 'コンセプトダイアグラムの描き方',
+		'description' => 'ゴールとスタート、2つの心理軸、顧客状態、分岐と統合、施策、評価指標を8つの手順で整理する公式ガイドです。',
+		'inLanguage'  => 'ja-JP',
+		'step'        => $howto_steps,
+	);
+}
+
+/**
  * Make the official site, proposer, publisher and article relationships explicit.
  */
 function cd_filter_structured_data( $json_ld ) {
@@ -219,8 +331,8 @@ function cd_filter_structured_data( $json_ld ) {
 			'@type'       => 'WebPage',
 			'@id'         => $site_url . '#webpage',
 			'url'         => $site_url,
-			'name'        => 'コンセプトダイアグラム公式サイト',
-			'description' => '顧客の心理変容と企業の施策を図解し、顧客理解と施策評価につなげるコンセプトダイアグラムの公式情報サイトです。',
+			'name'        => '顧客の変化を描き、施策と指標をつなぐ',
+			'description' => 'コンセプトダイアグラムは、顧客の心理・行動の変化を2軸で描き、提供する体験と評価指標をつなぐフレームワークです。提唱者の清水誠が、公式定義、描き方、事例、FAQを公開します。',
 			'inLanguage'  => $language,
 			'isPartOf'     => array( '@id' => $website_id ),
 			'about'        => array( '@id' => $proposer_id ),
@@ -304,6 +416,9 @@ function cd_filter_structured_data( $json_ld ) {
 		}
 		if ( 'concept-diagram-workshop-guide' === $post_name ) {
 			$graph[] = cd_workshop_howto( $url );
+		}
+		if ( 'how-to-draw-concept-diagram' === $post_name ) {
+			$graph[] = cd_drawing_hub_howto( $url );
 		}
 
 		return array( '@context' => 'https://schema.org', '@graph' => $graph );

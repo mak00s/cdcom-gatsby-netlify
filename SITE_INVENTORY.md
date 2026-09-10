@@ -506,6 +506,18 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - トップと「ステップ数はいくつが適切？」は依頼時点ですでにインデックス済み。「コンセプトダイアグラムとは」と描き方前後編は「発見済み・未クロール」から優先クロールキューへ追加
 - GSCのページレポートは2026-08-05時点のデータで、復旧前のトップ404や閉鎖済みのNetlify・ストア・旧サブドメインの履歴を含む。反映後の件数変化を週次で観測する
 
+#### 検索意図とインデックス対象の整理（2026-09-10）
+
+- トップを公式サイトと主要導線の入口、「コンセプトダイアグラムとは」を目的・必須8項目・CJMとの差を説明する基幹記事として役割分担し、title、description、H1を更新
+- ユーザーレビュー待ちの「『とは』冒頭へ30秒で分かる公式定義を追加」は実施していない。変更前後の本文SHA-256が`74ecfdc314adcab8e3c365b5039545a15ffa23695c375d70b38f77cf6206c378`で一致することを確認
+- 「コンセプトダイアグラムの描き方｜8つの手順と完成サンプル」（ID 2448）を公開。前後編、ワークショップ、完成サンプル、FAQへの入口とし、グローバルナビとトップの「描き方」をこのページへ変更
+- 新しい描き方ページへ8段階の`HowTo` JSON-LDを追加。トップ、「とは」、描き方はいずれもH1が1件、JSON-LDが構文妥当であることを確認
+- `/note/`、著者アーカイブ、タグアーカイブ、`/note/category/about-cd/`へ`noindex,follow`を設定。FAQと事例のカテゴリページはindex可能なまま維持
+- XMLサイトマップから日付アーカイブとカテゴリ一覧を外し、`sitemap-misc.xml`、`post-sitemap.xml`、`page-sitemap.xml`だけに整理。FAQと事例のカテゴリページはトップおよびナビゲーションから引き続きクロール可能
+- 旧Storeの公開ルート`/home/mak-s/www/store.concept-diagram.com`へ410応答だけを行う`.htaccess`を設置し、トップと任意の下位パスでHTTP 410を確認。旧WordPress、商品、DBは復元していない
+- 変更前バックアップ: `/home/mak-s/backups/concept-diagram-before-search-intent-20260910.sql`、`/home/mak-s/backups/kosgis-add-function.pre-search-intent-20260910.php`（権限600）
+- 仮説、変更前値、判定条件、レビュー日は`analytics/search-intent-improvement-2026-09-10.md`へ記録
+
 ### 週次の定点観測（2026-08-06構築）
 
 - Google Sheets: https://docs.google.com/spreadsheets/d/1H-T49FsAWP-s3ObZpD_ezOS8HxCise5XdCKOeV-YVYE
@@ -520,6 +532,8 @@ WordPress、PHP、MySQL、主要テーマ・プラグインの大幅更新は完
 - 直近4週間でGA4が観測した外部参照元は`makoto-shimizu.com`と`library.musubu.in`。これは実流入ベースであり、網羅的な被リンク索引ではない
 - Search Consoleの「リンク」レポートは公式APIの対象外。網羅的なリンク一覧が必要な場合はSearch Console画面から手動エクスポートする
 - 現在はGTMのページビュー送信が不完全で、ページ別レポートの表示回数が0の行が多い。正規測定IDへの切替後に回復傾向を判定する
+- 2026-09-10に`Legacy URL Monitor`タブを追加。旧Store、旧Netlify、旧セミナー、旧フォーラムについて、HTTP応答と直近4完了週のGSCクリック・表示を毎週確認する
+- 完了条件は、期待するHTTP応答を維持し、URLプレフィックスの直近4完了週GSC表示回数が0になること。追加時点の表示回数は旧Store 6、旧Netlify 52、旧セミナー 2、旧フォーラム 2で、すべて観測継続
 
 ### AI一次情報・可視性改善（2026-08-11）
 

@@ -11,7 +11,9 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
 from google.analytics.data_v1beta.types import (
@@ -42,6 +44,12 @@ AI_SOURCE_PATTERNS = {
     "Microsoft Copilot": ("copilot.microsoft.com", "bing.com/chat"),
 }
 AUDIT_DATA_PATH = Path(__file__).with_name("ai_answer_benchmark.json")
+LEGACY_URL_TARGETS = (
+    ("旧ストア", "https://store.concept-diagram.com/", {410}),
+    ("旧Netlify", "https://netlify.concept-diagram.com/", {301, 308}),
+    ("旧セミナー", "https://concept-diagram.com/seminar/", {404, 410}),
+    ("旧フォーラム", "https://concept-diagram.com/forums/", {404, 410}),
+)
 
 
 @dataclass(frozen=True)
@@ -187,6 +195,22 @@ def ai_service(source: str) -> str | None:
     return None
 
 
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[no-untyped-def]
+        return None
+
+
+def http_status(url: str) -> int | str:
+    request = Request(url, method="HEAD", headers={"User-Agent": "ConceptDiagram-WeeklyMonitor/1.0"})
+    try:
+        with build_opener(NoRedirect).open(request, timeout=15) as response:
+            return response.status
+    except HTTPError as exc:
+        return exc.code
+    except (URLError, TimeoutError) as exc:
+        return f"error: {type(exc).__name__}"
+
+
 def load_json_rows(path: Path, columns: list[str]) -> list[list[Any]]:
     if not path.exists():
         return []
@@ -330,6 +354,32 @@ def collect_report(config: Config) -> dict[str, list[list[Any]]]:
         ["query", "page"],
         row_limit=25000,
     )
+    legacy_rows: list[list[Any]] = []
+    for label, target_url, expected_statuses in LEGACY_URL_TARGETS:
+        matching = [
+            row for row in landing_rows
+            if row.get("keys", [""])[0].startswith(target_url)
+        ]
+        clicks = sum(float(row.get("clicks", 0)) for row in matching)
+        impressions = sum(float(row.get("impressions", 0)) for row in matching)
+        status = http_status(target_url)
+        status_ok = isinstance(status, int) and status in expected_statuses
+        search_ok = impressions == 0
+        legacy_rows.append(
+            [
+                datetime.now(REPORT_TZ).isoformat(timespec="seconds"),
+                detail_start.isoformat(),
+                detail_end.isoformat(),
+                label,
+                target_url,
+                status,
+                "/".join(str(code) for code in sorted(expected_statuses)),
+                n(clicks),
+                n(impressions),
+                "達成" if status_ok and search_ok else "観測継続",
+                "期待HTTP応答を維持し、直近4完了週のGSC表示回数が0",
+            ]
+        )
     ai_referral_rows = sorted(
         [
             [
@@ -409,6 +459,7 @@ def collect_report(config: Config) -> dict[str, list[list[Any]]]:
             Path(os.environ.get("AI_CRAWLER_JSON", "analytics/ai_crawler_snapshot.json")),
             ["week_start", "week_end", "crawler", "candidate_requests", "verified_requests", "content_requests", "robots_requests", "http_2xx", "http_4xx", "http_5xx", "last_seen", "notes"],
         ),
+        "Legacy URL Monitor": legacy_rows,
     }
 
 
@@ -423,6 +474,7 @@ HEADERS: dict[str, list[str]] = {
     "AI Referrals": ["週開始", "週終了", "AIサービス", "参照元", "メディア", "セッション", "ユーザー", "エンゲージドセッション"],
     "AI Answer Audit": ["監査日", "段階", "AIサービス", "モード", "提唱者", "定義", "公式URL引用", "公式優先", "ステップ数", "旧URL回避", "現サービス", "合計", "所見"],
     "AI Crawlers": ["週開始", "週終了", "クローラー", "UA候補", "検証済みリクエスト", "コンテンツ取得", "robots.txt", "2xx", "4xx", "5xx", "最終確認", "所見"],
+    "Legacy URL Monitor": ["確認日時", "集計開始", "集計終了", "対象", "URLプレフィックス", "HTTP", "期待HTTP", "GSCクリック", "GSC表示回数", "判定", "達成条件"],
 }
 
 
@@ -444,6 +496,104 @@ def ensure_report_tabs(sheets: Any, spreadsheet_id: str) -> None:
             valueInputOption="RAW",
             body={"values": [headers]},
         ).execute()
+
+
+def format_legacy_monitor_tab(sheets: Any, spreadsheet_id: str) -> None:
+    spreadsheet = sheets.spreadsheets().get(
+        spreadsheetId=spreadsheet_id, fields="sheets.properties"
+    ).execute()
+    properties = {
+        sheet["properties"]["title"]: sheet["properties"]
+        for sheet in spreadsheet.get("sheets", [])
+    }
+    monitor = properties.get("Legacy URL Monitor")
+    if not monitor:
+        return
+    sheet_id = monitor["sheetId"]
+    sheets.spreadsheets().batchUpdate(
+        spreadsheetId=spreadsheet_id,
+        body={
+            "requests": [
+                {
+                    "repeatCell": {
+                        "range": {
+                            "sheetId": sheet_id,
+                            "startRowIndex": 0,
+                            "endRowIndex": 1,
+                            "startColumnIndex": 0,
+                            "endColumnIndex": 11,
+                        },
+                        "cell": {
+                            "userEnteredFormat": {
+                                "backgroundColor": {"red": 0.16, "green": 0.35, "blue": 0.52},
+                                "textFormat": {
+                                    "bold": True,
+                                    "foregroundColor": {"red": 1, "green": 1, "blue": 1},
+                                },
+                                "wrapStrategy": "WRAP",
+                            }
+                        },
+                        "fields": "userEnteredFormat(backgroundColor,textFormat,wrapStrategy)",
+                    }
+                },
+                {
+                    "repeatCell": {
+                        "range": {
+                            "sheetId": sheet_id,
+                            "startRowIndex": 1,
+                            "startColumnIndex": 10,
+                            "endColumnIndex": 11,
+                        },
+                        "cell": {"userEnteredFormat": {"wrapStrategy": "WRAP"}},
+                        "fields": "userEnteredFormat.wrapStrategy",
+                    }
+                },
+                {
+                    "updateSheetProperties": {
+                        "properties": {
+                            "sheetId": sheet_id,
+                            "gridProperties": {"frozenRowCount": 1},
+                        },
+                        "fields": "gridProperties.frozenRowCount",
+                    }
+                },
+                {
+                    "autoResizeDimensions": {
+                        "dimensions": {
+                            "sheetId": sheet_id,
+                            "dimension": "COLUMNS",
+                            "startIndex": 0,
+                            "endIndex": 11,
+                        }
+                    }
+                },
+                {
+                    "updateDimensionProperties": {
+                        "range": {
+                            "sheetId": sheet_id,
+                            "dimension": "COLUMNS",
+                            "startIndex": 4,
+                            "endIndex": 5,
+                        },
+                        "properties": {"pixelSize": 300},
+                        "fields": "pixelSize",
+                    }
+                },
+                {
+                    "updateDimensionProperties": {
+                        "range": {
+                            "sheetId": sheet_id,
+                            "dimension": "COLUMNS",
+                            "startIndex": 10,
+                            "endIndex": 11,
+                        },
+                        "properties": {"pixelSize": 320},
+                        "fields": "pixelSize",
+                    }
+                },
+            ]
+        },
+    ).execute()
 
 
 def replace_tab_values(sheets: Any, spreadsheet_id: str, tab: str, rows: list[list[Any]]) -> None:
@@ -519,6 +669,7 @@ def write_report(config: Config, report: dict[str, list[list[Any]]]) -> None:
     ensure_report_tabs(sheets, config.spreadsheet_id)
     for tab, rows in report.items():
         replace_tab_values(sheets, config.spreadsheet_id, tab, rows)
+    format_legacy_monitor_tab(sheets, config.spreadsheet_id)
     update_dashboard(sheets, config.spreadsheet_id, report)
     sheets.spreadsheets().values().append(
         spreadsheetId=config.spreadsheet_id,

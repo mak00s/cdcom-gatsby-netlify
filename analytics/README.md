@@ -36,6 +36,10 @@ The spreadsheet must be shared as editor with
   rows remain User-Agent candidates and are not included in verified totals.
 - `AI Answer Audit` is an evaluation log for the same cross-service prompt.
   Update `ai_answer_benchmark.json` when a new before/after observation is made.
+- `Legacy URL Monitor` checks the HTTP response of the closed Store, Netlify,
+  seminar, and forum URL groups. A row is complete only when the expected
+  response is preserved and the URL prefix has zero Search Console impressions
+  across the latest four completed weeks.
 - The Sakura key can only run `/home/mak-s/bin/export_ai_log_candidates.sh` and
   cannot open an interactive shell, allocate a PTY, or forward ports/agents.
 
