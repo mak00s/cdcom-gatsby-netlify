@@ -1,0 +1,22 @@
+{
+    "published_at": "2026-10-14T21:07:42+09:00",
+    "snapshot": "\/home\/mak-s\/backups\/drawing-guide-20261014\/posts-before-20261014-120739.json",
+    "assets": {
+        "01-axes.svg": {
+            "id": 2458,
+            "url": "https:\/\/concept-diagram.com\/wp-content\/uploads\/2026\/10\/cd-drawing-guide-20261014-01-axes.svg"
+        },
+        "02-states.svg": {
+            "id": 2459,
+            "url": "https:\/\/concept-diagram.com\/wp-content\/uploads\/2026\/10\/cd-drawing-guide-20261014-02-states.svg"
+        },
+        "03-support.svg": {
+            "id": 2460,
+            "url": "https:\/\/concept-diagram.com\/wp-content\/uploads\/2026\/10\/cd-drawing-guide-20261014-03-support.svg"
+        },
+        "04-pitfalls.svg": {
+            "id": 2461,
+            "url": "https:\/\/concept-diagram.com\/wp-content\/uploads\/2026\/10\/cd-drawing-guide-20261014-04-pitfalls.svg"
+        }
+    }
+}

@@ -1,5 +1,8 @@
 # Concept Diagram weekly analytics report
 
+Drawing-guide publication, baseline and pre-registered review criteria:
+[`drawing-guide-improvement-2026-10-14.md`](drawing-guide-improvement-2026-10-14.md).
+
 Every Monday at 09:15 JST, GitHub Actions refreshes a Google Sheets report from
 GA4, Google Search Console, and the Sakura access logs. It rebuilds the latest
 52 completed weeks and the latest four-week detail tables, so delayed Search
