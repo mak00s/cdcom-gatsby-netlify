@@ -1,0 +1,58 @@
+{
+  "status": "review-only",
+  "target_post_id": 2448,
+  "title": "コンセプトダイアグラムの描き方｜図解と具体例で学ぶ8つの手順",
+  "description": "何から考え、どう2軸を決める？コンセプトダイアグラム提唱者の清水誠が、ヘアケア事業の具体例で描き方を解説。ゴール、顧客状態、分岐と統合、施策・評価指標まで、図の変化を追って学べます。",
+  "related_changes": [
+    {
+      "url": "https://concept-diagram.com/note/how-to-draw-concept-diagram-1/",
+      "operation": "replace-existing-hub-link",
+      "placement": "冒頭の公式ルールに関する案内の直後",
+      "html": "<p>この記事は、ゴールと2軸を考える過程を追う実演です。完成図から作成・検証までを一つの例で確認したい場合は、<a href=\"/note/how-to-draw-concept-diagram/\">コンセプトダイアグラムの描き方：図解と具体例で学ぶ8つの手順</a>を参照してください。</p>"
+    },
+    {
+      "url": "https://concept-diagram.com/note/how-to-draw-concept-diagram-2/",
+      "operation": "replace-existing-hub-link",
+      "placement": "冒頭の公式ルールに関する案内の直後",
+      "html": "<p>この記事は、顧客状態の配置と分岐・統合を考える実演です。対象顧客の設定から施策・評価指標までの全体は、<a href=\"/note/how-to-draw-concept-diagram/\">コンセプトダイアグラムの描き方：図解と具体例で学ぶ8つの手順</a>で確認できます。</p>"
+    },
+    {
+      "url": "https://concept-diagram.com/note/concept-diagram-workshop-guide/",
+      "operation": "replace-existing-hub-link",
+      "placement": "冒頭の目的説明の直後",
+      "html": "<p>このページはチームで描くための準備と進め方を説明します。まず具体例で描く流れをつかむには、<a href=\"/note/how-to-draw-concept-diagram/\">図解付きの描き方ガイド</a>から確認してください。両ページで手順の区切り方は異なりますが、設計・検証する内容は共通です。</p>"
+    },
+    {
+      "url": "https://concept-diagram.com/note/concept-diagram-example-hair-care/",
+      "operation": "insert-guide-link-and-correct-branch-explanation",
+      "placement": "冒頭の作例説明の直後／分岐と統合の説明段落",
+      "html": "<p>このページでは完成図を読み解きます。同じ題材で白紙から組み立てる過程は、<a href=\"/note/how-to-draw-concept-diagram/\">コンセプトダイアグラムの描き方</a>で確認できます。</p>",
+      "replacement_paragraph": "元の講義図では、「しっかり納得」から「ずっとキープしたい」へ進む経路と、「他もケアしたい」を経て同じ状態へ合流する経路に分かれています。一つのケアを続けたい人と、食事など周辺のケアにも関心が広がる人とでは、必要な支援が違う、と考えた仮説です。",
+      "table_correction": "「意外と良い → 他もケアしたい」の行を「しっかり納得 → 他もケアしたい」に変更。元図の矢印に合わせる。"
+    },
+    {
+      "url": "https://makoto-shimizu.com/news/how-to-draw-concept-diagram/",
+      "operation": "proposed-local-patch",
+      "placement": "冒頭の更新説明の直後と末尾の公式サイトの詳しい資料の先頭",
+      "html": "<p>ヘアケア事業の具体例を使って、完成図から作成・検証までを追う<a href=\"https://concept-diagram.com/note/how-to-draw-concept-diagram/\">図解付きの公式描き方ガイド</a>を公開しています。手を動かして学びたい場合は、そちらを参照してください。この記事では、描く際の考え方と2018年版からの変化を整理します。</p>"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "drawing-intent",
+      "expected": "公開後28日で「コンセプトダイアグラム」と「描き方・書き方・作り方・作成方法」を組み合わせたクエリ群の表示が1回以上発生。56日で同群のクリックが1回以上発生。未発生の場合はsupportedにしない。",
+      "pattern": "コンセプト\\s*ダイアグラム.*(描き方|書き方|作り方|作成方法)|(描き方|書き方|作り方|作成方法).*コンセプト\\s*ダイアグラム"
+    },
+    {
+      "id": "example-navigation",
+      "expected": "公開後28日で描き方ガイドから完成サンプル・実演前後編・ワークショップのいずれかへの遷移を1件以上観測。現行のページ集計だけでは遷移を証明できないため、GA4の経路データで確認。"
+    }
+  ],
+  "baseline": {
+    "period": "2026-09-14/2026-10-11",
+    "page_impressions": 21,
+    "page_clicks": 0,
+    "page_position": 22.33333333,
+    "note": "ページ全体の順位で、描き方クエリの順位ではない。公開日未定のため、実際の公開前に基準期間を更新する。"
+  }
+}
