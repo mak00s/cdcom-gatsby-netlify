@@ -1,0 +1,39 @@
+{
+  "status": "review-only",
+  "target_post_id": 1500,
+  "target_url": "https://concept-diagram.com/note/about-concept-diagram/",
+  "title": "コンセプトダイアグラムとは｜目的・8つの構成要素・CJMとの違い",
+  "title_policy": "Keep the published title unchanged.",
+  "description": "コンセプトダイアグラムとは、顧客の心理・態度の変化を2軸で描き、施策と評価指標をつなぐ図解手法です。提唱者の清水誠が、具体例、活用する目的、8つの構成要素、カスタマージャーニーマップとの違いを解説します。",
+  "related_changes": [
+    {
+      "url": "https://makoto-shimizu.com/news/what-is-concept-diagram/",
+      "placement": "冒頭の定義と仮説の説明の後。本文は保持して案内を追加する候補。",
+      "html": "<p>公式の定義と構成要素、具体例、CJMとの違いは、<a href=\"https://concept-diagram.com/note/about-concept-diagram/\">コンセプトダイアグラム公式サイトの基準ページ</a>にまとめています。この記事は、顧客についての仮説を図とデータで検証する考え方を整理する個人メモです。</p>"
+    }
+  ],
+  "review_points": [
+    "9月30日に承認した定義と2段落目は文言を維持。タイトルも維持。",
+    "新旧原稿の定義・沿革・CJM説明を統合。公式定義と旧本文の矛盾を解消。",
+    "同じヘアケア作例で図、読み方、活用例、8項目の例を対応。",
+    "図のA〜Gは矢印の参照記号で、8項目の番号ではない。",
+    "詳細な作図手順は描き方ガイドへ。CJMの整理軸を説明し、旧比較表の解説は専用FAQへ。",
+    "個人サイトの案内文も同じプレビューで確認。公開は今回の作業に含めない。"
+  ],
+  "hypotheses": [
+    {
+      "id": "definition-intent",
+      "query_pattern": "^コンセプト\\s*ダイアグラムとは$",
+      "expected": "公開後28日で対象クエリのクリック1以上、表示加重平均順位6.35位以内。表示20未満なら順位は判定保留。少数の基準達成だけで因果効果を断定しない。"
+    },
+    {
+      "id": "adjacent-intents",
+      "query_pattern": "コンセプト\\s*ダイアグラム.*(意味|目的|メリット|構成要素|CJM|カスタマージャーニー)|(意味|目的|メリット|構成要素|CJM|カスタマージャーニー).*コンセプト\\s*ダイアグラム",
+      "expected": "公開後56日で対象クエリ群の表示1以上。現在未観測のため需要そのものも仮説。"
+    },
+    {
+      "id": "understanding-to-practice",
+      "expected": "公開後28日でこのページから総合描き方ガイドへの遷移1以上。GA4の経路データで確認し、ページ別集計だけで推定しない。"
+    }
+  ]
+}

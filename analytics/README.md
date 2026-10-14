@@ -2,6 +2,8 @@
 
 Drawing-guide publication, baseline and pre-registered review criteria:
 [`drawing-guide-improvement-2026-10-14.md`](drawing-guide-improvement-2026-10-14.md).
+Official-definition article research, publication and review criteria:
+[`overview-research-2026-10-14.md`](overview-research-2026-10-14.md).
 
 Every Monday at 09:15 JST, GitHub Actions refreshes a Google Sheets report from
 GA4, Google Search Console, and the Sakura access logs. It rebuilds the latest
